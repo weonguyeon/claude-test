@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESG-First AI 디자인 에이전트 | 지속가능한 건축 혁신 플랫폼</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #1a1a1a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 헤더 */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0c5c4c;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #0c5c4c;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #0c5c4c 0%, #17a085 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(12, 92, 76, 0.3);
+        }
+
+        /* 히어로 섹션 */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            background: linear-gradient(135deg, #0a3d34 0%, #0c5c4c 50%, #17a085 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -200px;
+            right: -100px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #0c5c4c;
+            padding: 1rem 2.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2.5rem;
+            border: 2px solid white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #0c5c4c;
+        }
+
+        /* 섹션 공통 스타일 */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #0c5c4c;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 문제점 섹션 */
+        .problems {
+            background: #f8f9fa;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #d32f2f;
+        }
+
+        /* 솔루션 섹션 */
+        .solution {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+        }
+
+        .solution-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .solution-text h2 {
+            font-size: 2.5rem;
+            color: #0c5c4c;
+            margin-bottom: 1.5rem;
+        }
+
+        .solution-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .solution-features {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .solution-features ul {
+            list-style: none;
+        }
+
+        .solution-features li {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: #f1f8f4;
+            border-radius: 8px;
+            border-left: 4px solid #17a085;
+        }
+
+        /* 핵심 기능 섹션 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s;
+            border-top: 4px solid #17a085;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(12, 92, 76, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #0c5c4c;
+        }
+
+        /* 차별화 포인트 */
+        .differentiation {
+            background: #0c5c4c;
+            color: white;
+        }
+
+        .differentiation .section-title {
+            color: white;
+        }
+
+        .differentiation .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+
+        .diff-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .diff-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #a5d6a7;
+        }
+
+        .diff-card .number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #17a085;
+            margin-bottom: 1rem;
+        }
+
+        /* 개발 현황 */
+        .status {
+            background: #f8f9fa;
+        }
+
+        .status-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #0c5c4c 0%, #17a085 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .status-description {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* CTA 섹션 */
+        .final-cta {
+            background: linear-gradient(135deg, #0a3d34 0%, #0c5c4c 100%);
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .final-cta h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        /* 푸터 */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #17a085;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .solution-content {
+                grid-template-columns: 1fr;
+            }
+
+            .diff-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <nav>
+            <div class="logo">ESG-First AI</div>
+            <ul class="nav-links">
+                <li><a href="#solution">솔루션</a></li>
+                <li><a href="#features">핵심기능</a></li>
+                <li><a href="#differentiation">차별화</a></li>
+                <li><a href="#contact">문의하기</a></li>
+            </ul>
+            <a href="#contact" class="cta-button">데모 신청</a>
+        </nav>
+    </header>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>대한민국의 지속가능한 건축 혁신</h1>
+            <p class="subtitle">ESG 인테리어 AI 에이전트 & 공정 투명성 인증 플랫폼</p>
+            <p class="description">
+                인테리어 산업의 비효율, 정보 비대칭, ESG 경영 도입의 어려움을 한 번에 해결하는
+                차세대 B2B SaaS 솔루션
+            </p>
+            <div class="hero-buttons">
+                <a href="#solution" class="btn-primary">솔루션 알아보기</a>
+                <a href="#contact" class="btn-secondary">데모 신청하기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 문제점 섹션 -->
+    <section class="problems">
+        <h2 class="section-title">인테리어 산업의 3대 문제</h2>
+        <p class="section-subtitle">
+            현재 인테리어 산업이 직면한 근본적인 문제들을 파악하고 해결합니다
+        </p>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon">⚠️</div>
+                <h3>고질적인 비효율</h3>
+                <p>수작업 중심의 설계 프로세스로 인한 시간과 비용 낭비, 반복 작업의 비효율성</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">🔒</div>
+                <h3>정보 비대칭</h3>
+                <p>고객과 시공사 간의 정보 격차로 인한 신뢰 부족, 불투명한 공정 관리</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">🌍</div>
+                <h3>ESG 경영의 어려움</h3>
+                <p>지속가능한 건축에 대한 필요성은 증가하나 실질적 도입 방법 부재</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 솔루션 섹션 -->
+    <section class="solution" id="solution">
+        <h2 class="section-title">ESG-First AI 디자인 에이전트</h2>
+        <p class="section-subtitle">
+            AI 기술과 ESG 원칙이 결합된 혁신적인 B2B SaaS 솔루션
+        </p>
+        <div class="solution-content">
+            <div class="solution-text">
+                <h2>AI가 만드는<br>지속가능한 미래</h2>
+                <p>
+                    고객 상담 녹취록, 도면, 현장 사진 등 비정형 데이터를 AI가 자동으로 분석하여
+                    ESG 기준에 최적화된 다수의 인테리어 설계안을 생성합니다.
+                </p>
+                <p>
+                    3D 시각화 결과물까지 신속하게 제공하여 의사결정 시간을 획기적으로 단축합니다.
+                </p>
+            </div>
+            <div class="solution-features">
+                <ul>
+                    <li><strong>🎤 자동 분석:</strong> 상담 녹취, 도면, 사진 자동 처리</li>
+                    <li><strong>🌱 ESG 최적화:</strong> 지속가능성 기준 자동 적용</li>
+                    <li><strong>🎨 다중 설계안:</strong> 여러 옵션 동시 생성</li>
+                    <li><strong>📊 3D 시각화:</strong> 실시간 렌더링 결과물</li>
+                    <li><strong>⚡ 신속한 처리:</strong> 수일에서 수시간으로 단축</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 핵심 기능 섹션 -->
+    <section id="features">
+        <h2 class="section-title">핵심 기능</h2>
+        <p class="section-subtitle">
+            전 공정을 자동화하고 투명성을 보장하는 통합 플랫폼
+        </p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI 자동 설계</h3>
+                <p>비정형 데이터를 분석하여 최적의 설계안 자동 생성</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌿</div>
+                <h3>ESG 내재화</h3>
+                <p>설계 알고리즘에 ESG 원칙을 기본값으로 적용</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3>투명성 체크리스트</h3>
+                <p>14개 핵심 공정을 고객이 직접 확인·승인</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>ESG 준수 보고서</h3>
+                <p>자동 생성되는 지속가능성 준수 리포트</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>전 공정 자동화</h3>
+                <p>브리핑부터 사후관리까지 원스톱 솔루션</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>3D 시각화</h3>
+                <p>실시간 렌더링으로 즉시 확인 가능</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 차별화 포인트 -->
+    <section class="differentiation" id="differentiation">
+        <h2 class="section-title">경쟁사 대비 차별화 포인트</h2>
+        <p class="section-subtitle">
+            업계 최초로 제공하는 혁신적인 기능들
+        </p>
+        <div class="diff-grid">
+            <div class="diff-card">
+                <div class="number">01</div>
+                <h3>전 공정 자동화 및 ESG 내재화</h3>
+                <p>
+                    경쟁사는 시각화, 중개 등 특정 기능에 집중하지만, 본 솔루션은
+                    <strong>'고객 브리핑 → 설계/시각화 → ESG 준수 보고서'</strong>까지
+                    전 과정을 자동화합니다.
+                </p>
+                <p style="margin-top: 1rem;">
+                    ESG 원칙을 선택이 아닌 설계 알고리즘의 기본값으로 내재화하여
+                    지속가능성을 자동으로 보장합니다.
+                </p>
+            </div>
+            <div class="diff-card">
+                <div class="number">02</div>
+                <h3>'투명성 인증 체크리스트' 시스템화</h3>
+                <p>
+                    업계 최초로 인테리어 계약부터 사후관리까지
+                    <strong>14개 핵심 공정을 고객이 직접 확인·승인하는
+                    '투명성 인증 체크리스트'</strong>를 플랫폼에 통합했습니다.
+                </p>
+                <p style="margin-top: 1rem;">
+                    인적 자원에 의존하던 '신뢰'의 문제를 기술로 해결하여
+                    확장 가능한 <strong>'서비스로서의 신뢰(Trust as a Service)'</strong>를 제공합니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 개발 현황 -->
+    <section class="status">
+        <h2 class="section-title">현재 개발 현황</h2>
+        <div class="status-content">
+            <div class="status-badge">MVP 개발 단계</div>
+            <p class="status-description">
+                현재 MVP(최소기능제품) 기획 및 개발 협의 단계에 있으며,
+                핵심 기능의 프로토타입을 구축하여 기술 실현 가능성을 검증하고 있습니다.
+                <br><br>
+                베타 테스트 참여 기업을 모집 중이며, 초기 파트너사에게는
+                특별한 혜택이 제공됩니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- 최종 CTA -->
+    <section class="final-cta" id="contact">
+        <h2>지속가능한 건축의 미래를 함께 만들어갑니다</h2>
+        <p>지금 바로 데모를 신청하고 인테리어 산업의 혁신을 경험하세요</p>
+        <div class="hero-buttons">
+            <a href="mailto:contact@esg-first-ai.com" class="btn-primary">문의하기</a>
+            <a href="#" class="btn-secondary">자료 다운로드</a>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#solution">솔루션</a>
+                <a href="#features">핵심기능</a>
+                <a href="#differentiation">차별화</a>
+                <a href="#contact">문의하기</a>
+                <a href="#">개인정보처리방침</a>
+            </div>
+            <div style="margin: 1.5rem 0; color: #999; font-size: 0.95rem;">
+                <p style="margin-bottom: 0.5rem;"><strong style="color: #ccc;">주식회사 하우즈</strong></p>
+                <p>대표이사: 이수진</p>
+            </div>
+            <p>&copy; 2025 ESG-First AI Design Agent. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 스크롤 시 헤더 스타일 변경
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            }
+        });
+
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 스크롤 애니메이션
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 애니메이션 대상 요소들
+        document.querySelectorAll('.problem-card, .feature-card, .diff-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
